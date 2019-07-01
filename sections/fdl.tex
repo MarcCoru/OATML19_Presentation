@@ -1,0 +1,91 @@
+
+\begin{frame}
+\frametitle{Detection of Flooded Buildings with Multi-Sensor Data Fusion}
+\begin{tikzpicture}[node distance=.1em, inner sep=0, text depth=0pt, label distance=1em]
+
+\node[label={above:0.5m post-disaster}](a){\includegraphics[width=.33\textwidth]{images/resolution_examples/vhr.png}};
+
+\only<1>{\node[right=of a, label=above:10m pre-disaster](b){\includegraphics[width=.33\textwidth]{images/resolution_examples/s2_pre.png}};}
+\only<2>{\node[right=of a, label=above:10m post-disaster](b){\includegraphics[width=.33\textwidth]{images/resolution_examples/s2_post.png}};}
+
+\only<1>{\node[right=of b, label=above:10m pre-disaster](c){\includegraphics[width=.33\textwidth]{images/resolution_examples/coh_pre.png}};}
+\only<2>{\node[right=of b, label=above:10m post-disaster](c){\includegraphics[width=.33\textwidth]{images/resolution_examples/coh_post.png}};}
+
+\node[below=of a]{\small very high resolution};
+\node[below=of b]{\small optical};
+\node[below=of c]{\small radar};
+
+\end{tikzpicture}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Multi$^3$Net}
+
+\includegraphics[width=\textwidth]{images/multi3net}
+
+
+%\input{images/networks_.tikz}
+%
+%\begin{tikzpicture}[node distance=.75em, scale=1]
+%
+%\def\vhrimage{images/tile/vhr}
+%\def\labelimage{images/tile/flooded}
+%\def\labelimage{images/tile/buildings}
+%\draw pic (base) at (0,0) {vhrbaseline};
+%
+%\def\preimage{images/tile/coh_int_20170706_20170823}
+%\def\postimage{images/tile/coh_int_20170823_20170904}
+%\draw pic (s2damagenet) at (0,2.1) {s2damagenet};
+%%\coordinate (c1) at ($ (s2damageneth2)!0.5!(baseh3) $);
+%%\draw[conn] (s2damageneth2) -| ($ (baseh3.north) + (-.2em,0) $);
+%
+%\def\preimage{images/tile/s2pre}
+%\def\postimage{images/tile/s2post}
+%\draw pic (s2damagenetsar) at (0,4.7) {s2damagenet};
+%%\draw[conn] (s2damagenetsarh2) -| ($ (baseh3.north) + (.2em,0) $);
+%
+%\node[right=3em of s2damageneth2](out){\includegraphics[width=1.2cm]{images/tile/buildings}};
+%
+%\draw[conn] (s2damageneth2) -- (out);
+%\draw[conn] (s2damagenetsarh2) -| ($ (s2damagenetsarh2.east)!0.5!(out.west) $) |- (out.west);
+%\draw[conn] (basepspout) -| ($ (basepspout.east)!0.5!(out.west) $) |- (out.west);
+%
+%\end{tikzpicture}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Publications and Code}
+
+
+
+\textbf{AAAI 2019 Conference Paper:}
+
+{\small
+Rudner, T. G., Rußwurm, M., Fil, J., Pelich, R., Bischke, B., Kopackova, V., \& Bilinski, P. (2019). Multi $^{\mathbf {3}} $ Net: Segmenting Flooded Buildings via Fusion of Multiresolution, Multisensor, and Multitemporal Satellite Imagery. Association for the Advancement of Artificial Intelligence AAAI-19.}
+
+\vspace{2em}
+
+\textbf{2 NeurIPS Workshop Papers} at \textbf{AI for Social Good} and \textbf{Spatio-Temporal Workshops}.
+
+%\vspace{1em}
+%
+%\textbf{NeurIPS18 Spatio-Temporal Workshop:}\\
+%{\small
+%Fil, J., Rudner, T. G., Russwurm, M., Bischke, B., Pelich, R., Kopackova, V., \& Bilinski, P. (2018). Multi³Net: Segmenting Flooded Buildings via Fusion of Multiresolution, Multisensor, and Multitemporal Satellite Imagery. NeurIPS18 Spatio-Temporal Workshop}
+%
+%\vspace{1em}
+%
+%\textbf{NeurIPS18 AI for Social Good Workshop:}\\
+%{\small
+%Rudner, T. G., Rußwurm, M., Fil, J., Pelich, R., Bischke, B., \& Kopacková, V. Rapid Computer Vision-Aided Disaster Response via Fusion of Multiresolution, Multisensor, and Multitemporal Satellite Imagery. NeurIPS18 AI for Social Good Workshop.
+%}
+
+\vspace{1em}
+\textbf{GitHub}
+\url{https://github.com/FrontierDevelopmentLab/multi3net}
+
+\end{frame}

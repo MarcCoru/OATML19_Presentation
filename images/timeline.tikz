@@ -1,0 +1,50 @@
+\newcommand{\bblock}[6]{
+	\draw[#1] (axis cs: #2,#4) rectangle node[text=white]{#6} (axis cs: #3,#5);
+}
+
+\newcommand{\event}[2]{
+	\draw[draw=tumblue] (axis cs: #1,0) -- (axis cs: #1,8) node[above,font=\small]{#2};
+}
+
+\begin{tikzpicture}
+\tikzstyle{project}=[fill=tumblue, draw=none, font=\tiny]
+\tikzstyle{phase}=[fill=tumgray, draw=none, font=\small]
+\tikzstyle{futureproject}=[fill=tumblue, draw=none, font=\tiny, fill opacity=0.2]
+\tikzstyle{conference}=[fill=tumorange, draw=none, very thick, font=\tiny]
+
+\begin{axis}[
+	date coordinates in=x,
+	xticklabel=\year,
+	xtick={2019-01-01,2020-01-01,2021-01-01},
+	width=\textwidth,
+	height=6cm,
+	ymax=10,
+	ymin=-5,
+	xmin=2018-05-01,
+	xmax=2021-09-01,
+	hide y axis,
+	axis line style={draw=none}]
+	
+	\event{2018-06-01}{start}
+	\bblock{project}{2018-06-25}{2018-08-17}{1}{2}{FDL}
+	\bblock{project}{2018-10-01}{2019-2-15}{2}{3}{IRISA Obelix}
+%	\block{conference}{2018-12-01}{2018-12-06}{4}{5}{NeurIPS}
+%	\block{conference}{2018-11-12}{2018-11-16}{5}{6}{$\Phi$-week}
+%	\block{conference}{2019-01-27}{2019-02-01}{5}{6}{AAAI}
+	\event{2019-02-10}{this exposé}
+	\bblock{project}{2019-3-01}{2019-10-01}{3}{4}{crop type mapping}
+	%\block{project}{2019-8-01}{2019-10-15}{2}{3}{ESA}
+	\bblock{futureproject}{2019-10-01}{2020-06-01}{4}{5}{biomass and crop yield}
+	\bblock{futureproject}{2020-06-01}{2020-12-31}{5}{6}{nowcasting of atmospheric effects}
+	\bblock{futureproject}{2021-01-01}{2021-06-01}{6}{7}{writing}
+	\event{2021-06-01}{defense}
+	
+	\draw[left color=tumbluelight, right color=tumbluedark, draw=none, fill opacity=0.2] (axis cs: 2018-06-01,-2) rectangle node[left=10em, font=\small]{supervised} node[text=white, font=\small]{semi-supervised} node[right=9em, text=white, font=\small]{unsupervised} (axis cs: 2021-06-01,-1);
+	
+	\bblock{phase}{2018-06-01}{2018-11-31}{-4}{-3}{warm-up}
+	\bblock{phase}{2019-02-01}{2020-11-31}{-4}{-3}{research}
+	\bblock{phase}{2021-02-01}{2021-06-01}{-4}{-3}{wrap-up}
+	
+%\addplot [red] expression {1/(1+exp(-x))};  % <-- fails if uncommented
+\end{axis}
+\end{tikzpicture}

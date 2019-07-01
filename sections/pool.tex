@@ -1,0 +1,359 @@
+
+\addtocounter{framenumber}{-8}
+
+\begin{frame}
+\frametitle{Our Agenda}
+\large 
+
+\begin{columns}[t]
+	\column{.5\textwidth}
+	use pure \textbf<1>{data-driven end-to-end} learning
+	\begin{itemize}
+		\item no pre/postprocessing of data
+		\item top-of-atmosphere data
+		\item no atmospheric correction
+		\item no cloud filtering
+		\item no additional image registration
+	\end{itemize}
+	\vspace{1em}
+	adapt established methods to EO Sensors
+	\begin{itemize}
+		\item NLP to EO: Sentence translation to image sequence classification
+	\end{itemize}
+	
+	\column{.5\textwidth}
+	\vspace{-2em}
+	\uncover<1->{
+		\centering 
+		\input{images/datenbasiert.tikz}
+	}
+	
+	%			\vspace{1em}
+	
+	
+\end{columns}
+
+\end{frame}
+
+
+\begin{frame}{UCR Datasets}
+
+%	\begin{columns}
+%		\column{.6\textwidth}
+%		
+\begin{itemize}[leftmargin=0cm]
+	\item broad family of \textbf{46 diverse datasets}
+	\item \textbf{accuracies reported} from other early classification approaches
+	\item covers \textbf{sensor data}, \textbf{motion tracking}, \textbf{electrocardiography data}
+	\item many, but \textbf{small datasets} \small{(overall circa 500 MB)}
+\end{itemize}
+%		\column{.4\textwidth}
+%		\includegraphics[width=\textwidth]{images/UCR}
+%	\end{columns}
+
+\vspace{.5em}
+\centering\includegraphics[width=5cm]{images/GunPoint}
+
+\vspace{.5em}
+
+{\small \texttt{http://www.timeseriesclassification.com/}
+}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Communications}
+\centering
+\begin{tikzpicture}[xscale=3.5, yscale=2]
+%\draw[fill=tumblue, draw=none, opacity=0.5](-1,0) circle (1.5);
+\node[fill=tumbluelight, draw=none, opacity=0.5, circle, minimum width=6cm, label=Earth Observation] at (-1,0){};
+
+\node[fill=tumorange!50, draw=none, opacity=0.5, circle, minimum width=6cm, label=Machine Learning] at (1,0){};
+%\draw[fill=tumorange, draw=none, opacity=0.5](1,0) circle (1.5);
+
+%\node at (-1.3,1){Data};
+
+\node[text width=3.5cm] at (-1,.9){\focusmethod is a \textbf{tool} for our \focusdata};
+\node[text width=3.5cm] at (1,.9){\focusdata is a \textbf{benchmark} for our \focusmethod};
+
+
+\node[text width=3.5cm] at (-1,.3){\textbf{should generalize} to applications of a \\ specific sub-field};
+\node[text width=3.5cm] at (1,.3){\textbf{must generalize} to many fields of applications};
+
+\node[text width=3.5cm] at (-1,-.3){data has specific \\ \textbf{phyisical properties}};
+\node[text width=3.5cm] at (1,-.3){data is a \textbf{feature vector}};
+%
+%\node[text width=2cm] at (-1.3,-.6){{physics}, {sensors}, {applications}};
+
+%\node at (1.3,1){Method};
+
+%\node at (-1.3,1){IGARSS};
+%\node at (-1.6,-1){ISPRS};
+%\node at (-1.2,-.6){IEEE-GRSS};
+%\node at (-1.8,.4){MDPI-RS Journal};
+%\node at (-1.3,0){RSE Journal};
+%
+%\node at (1.3,1){NeurIPS};
+%\node at (1.6,-1){CVPR};
+%\node at (1.2,-.6){ICML};
+%\node at (1.8,.4){ECCV};
+%\node at (1.3,.2){ECML};
+%
+%\node at (0,.5){CVPR EarthVision};
+%\node at (0,0){ECML MACLEAN};
+%\node at (0,-.5){(ESA-$\Phi$-week)};
+
+\end{tikzpicture}
+
+\end{frame}
+
+\begin{frame}<presentation:3>
+\frametitle{Chair of Remote Sensing Technology}
+
+\input{images/organigram.tikz}
+\end{frame}
+
+\begin{frame}<presentation:5>
+\frametitle{Chair of Remote Sensing Technology}
+
+\input{images/organigram.tikz}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Summary: Balancing Resolutions}
+
+\begin{columns}
+	\column{.5\textwidth}
+
+
+\begin{tikzpicture}[scale=3,
+x={(\raarot cm,\rbarot cm)},%
+y={(\rabrot cm, \rbbrot cm)},%
+z={(\racrot cm, \rbcrot cm)}]
+
+
+
+
+\draw [->] (0,0,0) -- (1.2,0,0) node[anchor=north east]{spatial};
+\draw [->] (0,0,0) -- (0,1.2,0) node[anchor=north west]{spectral};
+\draw [->] (0,0,0) -- (0,0,1.2) node[anchor=south]{temporal};   
+
+\draw (0,0,1) node[right] {hours};
+\draw (0,0,0.66) node[right] {days};
+\draw (0,0,0.33) node[right] {weeks};
+
+\draw (0,.33,0) node[right] {3};
+\draw (0,.66,0) node[right] {15};
+\draw (0,1,0) node[right] {$>$100};
+
+\draw (1,0,0) node[above left] {$<$1m};
+\draw (.8,0,0) node[above left] {10m};
+\draw (.6,0,0) node[above left] {100m};
+\draw (.4,0,0) node[above left] {1km};
+\draw (.2,0,0) node[above left] {10km};
+
+
+%% High Resolution
+\visible<2>{\domain{1.2}{0.4}{.6}{tumgreen};}
+
+%% environmental satellites
+\visible<3>{\domain{0.5}{.9}{.9}{tumorange};}
+
+%% Hyper-spectral
+\visible<4>{\domain{0.7}{1.3}{.2}{tumgreen};}
+
+%% Multi-spectral
+\visible<5>{\domain{0.9}{.7}{.7}{tumgreen};}
+
+%% weather satellites	
+\visible<6>{\domain{0.3}{.6}{1.2}{tumblue};}
+
+\end{tikzpicture}
+
+\column{.5\textwidth}
+
+\visible<2->{
+	\textbf{Scheduled Acquisitions}
+	\begin{itemize}
+		\item<2-> very high spatial Resolution Imagery
+	\end{itemize}
+}
+\visible<3->{
+	\textbf{Global coverage and open data policy}
+	\begin{itemize}
+		\item<3-> multi-spectral satellites
+		\item<4-> environmental satellites
+		\item<5-> weather satellites
+	\end{itemize}
+	
+}
+
+\end{columns}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Augmenting Classification Models}
+
+\begin{columns}
+	
+	\column{.5\textwidth}
+	\begin{center}
+		
+		\input{images/backprop_example.tikz}
+	\end{center}
+	\column{.5\textwidth}
+	\input{images/qualitative_example.tikz}
+	
+	
+\end{columns}
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Earliness-Aware Loss function}
+
+\Large
+
+\begin{equation*}
+\mathcal{L} = P(t)\left(\alpha (1-\yhat^+) + \left(1-\alpha\right) \frac{t}{T}\right)
+\end{equation*}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Spectral Bands}
+
+\begin{columns}
+	%	\column{.2\textwidth}
+	%	
+	%	\begin{equation*}
+	%	\rho_{\lambda} = \int_{\lambda-\frac{b}{2}}^{\lambda-\frac{b}{2}} \rho_(\lambda) d\lambda
+	%	\end{equation*}
+	%	
+	%	\vspace{1em}
+	%	
+	%	integrated between in spectral \textbf{bands} bounds $\lambda - \frac{b}{2}$ and $\lambda + \frac{b}{2}$ with the \emph{bandwidth} b.
+	%	
+	
+	\column{.9\textwidth}
+	
+	\includegraphics[width=\textwidth]{images/Meer14Satellitebands}
+	
+	
+\end{columns}
+
+\vspace{1em}
+{\small
+	Van der Meer, F. D., Van der Werff, H. M. A., \& Van Ruitenbeek, F. J. A. (2014). Potential of ESA's Sentinel-2 for geological applications. Remote sensing of environment, 148, 124-133.
+}
+
+\end{frame}
+
+
+\begin{frame}{Benchmark Datasets}
+
+%	\begin{columns}
+%		\column{.6\textwidth}
+%		
+\begin{itemize}[leftmargin=0cm]
+	\item broad family of \textbf{46 diverse datasets}
+	\item \textbf{accuracies reported} from other early classification approaches
+	\item covers \textbf{sensor data}, \textbf{motion tracking}, \textbf{electrocardiography data}
+	\item many, but \textbf{small datasets} \small{(overall circa 500 MB)}
+\end{itemize}
+%		\column{.4\textwidth}
+%		\includegraphics[width=\textwidth]{images/UCR}
+%	\end{columns}
+
+{\textbf{GunPoint} dataset}
+\vspace{.5em}
+\centering\includegraphics[width=7cm]{images/GunPoint}
+
+\vspace{.5em}
+
+{\small \texttt{http://www.timeseriesclassification.com/}
+}
+\end{frame}
+
+\begin{frame}
+\frametitle{Two Fields}
+\centering
+\begin{tikzpicture}[scale=2]
+%\draw[fill=tumblue, draw=none, opacity=0.5](-1,0) circle (1.5);
+\node[fill=tumbluelight, draw=none, opacity=0.5, circle, minimum width=6cm, label=Earth Observation] at (-1,0){};
+
+\node[fill=tumorange!50, draw=none, opacity=0.5, circle, minimum width=6cm, label=Machine Learning] at (1,0){};
+%\draw[fill=tumorange, draw=none, opacity=0.5](1,0) circle (1.5);
+
+\draw[-stealth, shorten >=1cm] (-1.3,1) -- (0,0);
+\draw[-stealth, shorten >=1cm] (-1.6,-1) -- (0,0);
+\draw[-stealth, shorten >=1cm] (-1.2,-.6) -- (0,0);
+\draw[-stealth, shorten >=1cm] (-1.8,.4) -- (0,0);
+\draw[-stealth, shorten >=1cm] (-1.3,.2) -- (0,0);
+
+\node[font=\bfseries] at (-2,0) {applications};
+
+\draw[-stealth, shorten >=1cm] (1.3,1) -- (0,0);
+\draw[-stealth, shorten >=1cm] (1.6,-1) -- (0,0);
+\draw[-stealth, shorten >=1cm] (1.2,-.6) -- (0,0);
+\draw[-stealth, shorten >=1cm] (1.8,.4) -- (0,0);
+\draw[-stealth, shorten >=1cm] (1.3,.2) -- (0,0);
+
+\node[font=\bfseries] at (2,0) {methods};
+
+%\node[text width=2cm, circle, fill=tumblue, text=white]{global scale};
+%
+%\node[text width=2cm, circle, fill=tumblue, text=white]{global scale};
+
+%\node[font=\normalsize, fill=white, text width=2cm, rounded corners, fill opacity=.5, text opacity=1](phd) at (0,0){global scaleability \\ real world impact \\ Open Data};
+
+%\draw[-stealth, very thick] (phd) -- (0,, fil0);
+\end{tikzpicture}
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Communities}
+\centering
+\begin{tikzpicture}[scale=2]
+%\draw[fill=tumblue, draw=none, opacity=0.5](-1,0) circle (1.5);
+\node[fill=tumbluelight, draw=none, opacity=0.5, circle, minimum width=6cm, label=Earth Observation] at (-1,0){};
+
+\node[fill=tumorange!50, draw=none, opacity=0.5, circle, minimum width=6cm, label=Machine Learning] at (1,0){};
+%\draw[fill=tumorange, draw=none, opacity=0.5](1,0) circle (1.5);
+
+\node at (-1.3,1){IGARSS};
+\node at (-1.6,-1){ISPRS};
+\node at (-1.2,-.6){IEEE-GRSS};
+\node at (-1.8,.4){MDPI-RS Journal};
+\node at (-1.3,0){RSE Journal};
+
+\node at (1.3,1){NeurIPS};
+\node at (1.6,-1){CVPR};
+\node at (1.2,-.6){ICML};
+%\node at (1.8,.4){ECCV};
+\node at (1.5,.3){AISTATS};
+%\node at (1.3,.2){ECML};
+\node at (1.3,-.2){ICLR};
+
+\node at (0,.5){CVPR EarthVision};
+\node at (0,0){ECML MACLEAN};
+\node at (0,-.5){(ESA-$\Phi$-week)};
+
+\end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{MODIS Satellite}
+\only<1>{\includegraphics[width=\textwidth]{images/modis/MODIS_UK}}
+\only<2>{\includegraphics[width=\textwidth]{images/modis/MODIS_OXF}}
+\end{frame}
+
+

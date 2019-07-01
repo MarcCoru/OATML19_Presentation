@@ -1,0 +1,9 @@
+\tikz{
+	\begin{scope}[rotate=90]
+	%\draw[step=0.2] (0,0) grid (2,.2);
+	\foreach \i in {0,...,6}
+	\draw[tumblack,fill=tumorange!\pdfuniformdeviate 40,fill opacity=.9, rounded corners=0.5] (\i*.2,0) rectangle (\i*.2+.2,.2);
+	%       \draw[black,fill=black!\pdfuniformdeviate 40,fill opacity=.9, rounded corners=0.5] (\i*.2,0) rectangle (\i*.2+.2,.2);
+	
+	\end{scope}
+}

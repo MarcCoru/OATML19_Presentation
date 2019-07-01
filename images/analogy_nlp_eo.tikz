@@ -1,0 +1,39 @@
+\setrand{0}{100}{0.01}{1}
+	\newcommand{\drawmatrix}{
+		\left(\begin{matrix}\nextrand\thisrand\\\nextrand\thisrand\\\nextrand\thisrand\end{matrix}\right)
+	}
+
+	\newcommand{\image}[1]{
+		\begin{tikzpicture}
+			\node(img){\includegraphics[width=2cm]{#1}};
+			\node[minimum width=.5em,minimum height=.5em, fill=tumbluelight, xshift=-1em] at (img)(rect){};
+			
+			\node[right=of rect, fill=tumbluelight,, inner sep=.2em, rounded corners=1em,  opacity=.2](m){$\drawmatrix$};
+			\draw[tumbluelight] (rect.north) -- (m.north);
+			\draw[tumbluelight] (rect.south) -- (m.south);
+		\end{tikzpicture}
+	}
+
+	
+	\begin{tikzpicture}[node distance=1em]
+		\node[font=\scriptsize](e1){\image{images/analogy_examples/170127_snow.png}};
+		\node[right=of e1, font=\scriptsize](e2){\image{images/analogy_examples/160929_clear.png}};
+		\node[right=of e2, font=\scriptsize](e3){\image{images/analogy_examples/161115_cloudy.png}};
+		\node[right=of e3, font=\scriptsize](e4){\image{images/analogy_examples/160728_partlycloudy.png}};
+		
+		\node[below=of e1, font=\scriptsize](t1){$E(\text{\textbf{The}})=\drawmatrix$};
+		\node[below=of e2, font=\scriptsize](t2){$E(\text{\textbf{eagle}})=\drawmatrix$};
+		\node[below=of e3, font=\scriptsize](t3){$E(\text{\textbf{has}})=\drawmatrix$};
+		\node[below=of e4, font=\scriptsize](t4){$E(\text{\textbf{landed}})=\drawmatrix$};
+		
+		\node[above=of e1](x1){$\V{x}_1$};
+		\node[above=of e2](x2){$\V{x}_2$};
+		\node[above=of e3](x3){$\V{x}_3$};
+		\node[above=of e4](x4){$\V{x}_4$};
+		
+		\node[right= 7em of e4](eo){$f(\M{X})$};
+		\node[right= 7em of t4](nlp){$f(\M{X})$};
+		
+		\draw[-stealth] (e4) -- node[midway,above]{EO model} (eo);
+		\draw[-stealth] (t4) -- node[midway,above]{NLP model} (nlp);
+	\end{tikzpicture}

@@ -1,0 +1,40 @@
+
+\tikzsetnextfilename{datenbasiert}
+
+% exclude this file from externalize otherwise the if else condition dies not work
+\tikzset{external/export=false}
+\begin{tikzpicture}[]
+
+% if drawdl the deep learning part is drawn
+\providecommand{\drawdl}{1}
+
+\def\size{1.5cm}
+\def\iosize{1.5cm}
+
+\tikzstyle{illustration}=[yshift=-5mm]
+\tikzstyle{element}=[draw=tumivory, fill=white, inner sep=2mm, rounded corners, node distance=4em and 2em]
+\tikzstyle{ioelement}=[draw=tumivory, fill=tumwhite, inner sep=2mm, rounded corners, node distance=4em and 2em]
+\tikzstyle{edge}=[rounded corners=3mm]
+
+\node[ioelement, align=center,label=above:{$\M{X}$}](input){\resizebox{\iosize}{!}{\input{images/rastergrid.tikz}}}; %input\\$\VInput \in \R^D$
+%\node[illustration,above=of input](raster){};
+
+\node[element, right = of input,label=below:{end-to-end learning}](eelearning){
+	\hspace{-1em}\input{images/fcnet.tikz}
+}; %\emph{end-to-end learning}
+
+\node[ioelement,right=of eelearning, align=center,label=above:{$\V{y}$}](result){
+	\resizebox{!}{\iosize}{
+%		\rotatebox{90}{
+			\input{images/vectorgrid.tikz}
+%		}
+	}
+};
+%\node[illustration,above=of result](classprob){\resizebox{1cm}{!}{\vectorgrid}};
+
+
+% arrows
+\draw [-stealth, edge, draw=black] (input) -- (eelearning) -- (result);
+
+
+\end{tikzpicture}

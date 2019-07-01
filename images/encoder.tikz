@@ -1,0 +1,419 @@
+%\tikzsetnextfilename{network}
+
+\tikzstyle{operator} = [draw, circle, fill=tumbluemedium, draw=tumbluemedium, inner sep=0, text=white]
+%\tikzstyle{function} = [draw, rectangle, fill=tumbluemedium, draw=tumbluemedium, text=white]
+\tikzstyle{gate} = [fill=tumivory,draw,rounded corners]
+
+\tikzstyle{dummy} = [inner sep=0]
+\tikzstyle{flow} = [rounded corners]
+\tikzstyle{endflow} = [-stealth,flow]
+\tikzstyle{beginflow} = [stealth-,flow]
+
+\tikzstyle{bigpassbox} = [opacity=.2, rounded corners, draw=none]
+
+% defaultvalue -> might be replaced later
+\colorlet{tensorcolor}{tumblue}
+
+\tikzstyle{bigbox} = [rectangle, draw=tumivory, thick, fill=tumgraylight, rounded corners, 
+inner sep=.5ex]
+
+\tikzstyle{wireframe} = [draw=tumgray]
+\tikzstyle{image} = [inner sep=0, fill=none, minimum size=\imagewidth]
+
+\tikzset{pic shift/.store in=\shiftcoord,
+	pic shift={(0,0)},
+	pics/seqlstmfw/.style={
+		code={
+		\begin{scope}[shift={\shiftcoord},xscale=1.3,yscale=.8]
+			
+			\node[dummy] (bl) at (0,0){}; % bottom left
+			\node[dummy] (tr) at (1,1){}; % top right
+			
+			\node[dummy] (br) at ($ (bl -| tr) $){}; % bottom right
+			\node[dummy] (tl) at ($ (bl |- tr) $){}; % top left
+			
+			\node[fit=(bl) (tr),bigbox] (-C) {};
+			
+			% input coordinate for rounded draw lines -> slightly right of tl
+			\coordinate (-input) at (0.1,1); % top left
+			
+			% output coordinate for rounded draw lines -> slightly left of br
+			\coordinate (-coutput) at (0.9,0); % bottom right
+			\coordinate (-cinput) at (0.1,0); % bottom left
+			\coordinate (-houtput) at (0.9,1); % bottom right
+			
+%			% gate distance
+			\def\d{1/6}
+			
+			% gate heights
+			\def\h{1/3}
+			
+			\coordinate (f)  at bl+(1*\d,0);
+			\coordinate (i)  at bl+(2*\d,0);
+			\coordinate (j)  at bl+(3*\d,0);
+			\coordinate (o)  at bl+(4*\d,0);
+			\coordinate (out) at bl+(5*\d,0);
+			
+			\coordinate (gates) at (0,2*\h);
+			
+			%\node[above=of tl](xt){$x_{t}$};
+			%\node[left=of tl](htminus1){$h_{t-1}$};
+			
+			%\node[below=of br](ct){$c_{t}$};
+			
+			\node[gate](fgate) at ($ (gates -| f) $){};
+			\node[gate](igate) at ($ (gates -| i) $){};
+			\node[gate](jgate) at ($ (gates -| j) $){};
+			\node[gate](ogate) at ($ (gates -| o) $){};
+			
+%			\coordinate (htminus1) at bl+(-.5,0);
+%			\coordinate (ht) at bl+(-.5,0);
+%			
+			% forget gate
+			\node[operator](fmult) at ($ (bl -| fgate) $) {};
+			\draw[endflow] (-input) -| (fgate) -- (fmult); 
+			
+%			%j
+			\node[operator](jmult) at ([shift={(0,-1*\h)}]jgate) {};
+			\node[operator](cadd) at ($ (bl -| jgate) $) {};
+			\draw[endflow] (-input) -| (jgate) -- (jmult);
+			\draw[endflow] (jmult) -- (cadd); 			
+
+%			%i	
+			\draw[endflow] (-input) -| (igate) |- (jmult); 
+%
+%%			% outpu
+			\node[operator](outtanh) at ([shift={(0,1*\h)}]out) {};
+%			
+%			%o 
+			\draw[endflow] (tl) -| (ogate) |- (outtanh);
+			\draw[flow] (outtanh) |- (-houtput);
+%			
+%			% output flow
+			\draw[endflow] (cadd) -| (outtanh);
+			\draw[flow] (-cinput) -- (fmult) -- (cadd) -- (-coutput);
+%			
+			
+			% debug
+%			\node at (gates) {\tiny{gates}};
+%			\node at (-input) {\tiny{-input}};
+%			\node at (-coutput) {\tiny{-coutput}};
+%			\node at (-houtput) {\tiny{-houtput}};
+%			\node at (f) {\tiny{f}};
+%			\node at (i) {\tiny{i}};
+%			\node at (j) {\tiny{j}};
+%			\node at (o) {\tiny{o}};
+%			\node at (tl) {\tiny{tl}};
+%			\node at (br) {\tiny{br}};
+%			\node at (bl) {\tiny{bl}};
+%			\node at (tr) {\tiny{tr}};
+%			\node at (out) {\tiny{out}};
+			
+		\end{scope}
+		}
+	}
+}
+
+\tikzset{pic shift/.store in=\shiftcoord,
+	pic shift={(0,0)},
+	pics/seqlstmbw/.style={
+		code={
+			\begin{scope}[shift={\shiftcoord},xscale=1.3,yscale=-.8]
+				
+				\node[dummy] (bl) at (0,0){}; % bottom left
+				\node[dummy] (tr) at (1,1){}; % top right
+				
+				\node[dummy] (br) at ($ (bl -| tr) $){}; % bottom right
+				\node[dummy] (tl) at ($ (bl |- tr) $){}; % top left
+				
+				\node[fit=(bl) (tr),bigbox] (-C) {};
+				
+				% input coordinate for rounded draw lines -> slightly right of tl
+				\coordinate (-input) at (0.1,1); % top left
+				
+				% output coordinate for rounded draw lines -> slightly left of br
+				\coordinate (-coutput) at (0.9,0); % bottom right
+				\coordinate (-cinput) at (0.1,0); % bottom left
+				\coordinate (-houtput) at (0.9,1); % top right
+				
+				%			% gate distance
+				\def\d{1/6}
+				
+				% gate heights
+				\def\h{1/3}
+				
+				\coordinate (f)  at bl+(1*\d,0);
+				\coordinate (i)  at bl+(2*\d,0);
+				\coordinate (j)  at bl+(3*\d,0);
+				\coordinate (o)  at bl+(4*\d,0);
+				\coordinate (out) at bl+(5*\d,0);
+				
+				\coordinate (gates) at (0,2*\h);
+				
+				%\node[above=of tl](xt){$x_{t}$};
+				%\node[left=of tl](htminus1){$h_{t-1}$};
+				
+				%\node[below=of br](ct){$c_{t}$};
+				
+				\node[gate](fgate) at ($ (gates -| f) $){};
+				\node[gate](igate) at ($ (gates -| i) $){};
+				\node[gate](jgate) at ($ (gates -| j) $){};
+				\node[gate](ogate) at ($ (gates -| o) $){};
+				
+				%			\coordinate (htminus1) at bl+(-.5,0);
+				%			\coordinate (ht) at bl+(-.5,0);
+				%			
+				% forget gate
+				\node[operator](fmult) at ($ (bl -| fgate) $) {};
+				\draw[endflow] (-input) -| (fgate) -- (fmult); 
+				
+				%			%j
+				\node[operator](jmult) at ([shift={(0,-1*\h)}]jgate) {};
+				\node[operator](cadd) at ($ (bl -| jgate) $) {};
+				\draw[endflow] (-input) -| (jgate) -- (jmult);
+				\draw[endflow] (jmult) -- (cadd); 			
+				
+				%			%i	
+				\draw[endflow] (-input) -| (igate) |- (jmult); 
+				%
+				%%			% outpu
+				\node[operator](outtanh) at ([shift={(0,1*\h)}]out) {};
+				%			
+				%			%o 
+				\draw[endflow] (tl) -| (ogate) |- (outtanh);
+				\draw[flow] (outtanh) |- (-houtput);
+				%			
+				%			% output flow
+				\draw[endflow] (cadd) -| (outtanh);
+				\draw[flow] (-cinput) -- (fmult) -- (cadd) -- (-coutput);
+				%			
+				
+				% debug
+				%			\node at (gates) {\tiny{gates}};
+				%			\node at (-input) {\tiny{-input}};
+				%			\node at (-coutput) {\tiny{-coutput}};
+				%			\node at (-houtput) {\tiny{-houtput}};
+				%			\node at (f) {\tiny{f}};
+				%			\node at (i) {\tiny{i}};
+				%			\node at (j) {\tiny{j}};
+				%			\node at (o) {\tiny{o}};
+				%			\node at (tl) {\tiny{tl}};
+				%			\node at (br) {\tiny{br}};
+				%			\node at (bl) {\tiny{bl}};
+				%			\node at (tr) {\tiny{tr}};
+				%			\node at (out) {\tiny{out}};
+				
+			\end{scope}
+		}
+	}
+}
+
+%\newcommand{}{
+%	\begin{tikzpicture}
+%	% each layer
+%	\begin{scope}[scale=2]
+%	
+%	% raster size
+%	\def\d{0.7}		
+%	
+%	% distance layer
+%	\def\s{\d*5}
+%	
+%	\foreach \i in {1,...,6}
+%	{		
+%		\begin{scope}[
+%		yshift=\s*\i,every node/.append style={
+%			yslant=0.5,xslant=-1},yslant=0.5,xslant=-1
+%		]
+%		%\draw[step=3.33mm] (0,0) grid (1,1);
+%		%\fill[black,fill opacity=.9] (0.333,0.333) rectangle (0.333,0.333);    	    	  
+%		
+%		\foreach \row in {0,...,2}{
+%			\foreach \col in {0,...,2}{
+%				\draw[tumblack, fill=tumblue!\pdfuniformdeviate 40,fill opacity=1,rounded corners=1] (\col*\d/3,\row*\d/3) rectangle (\col*\d/3+\d/3, \row*\d/3+\d/3);
+%				%                 \draw[black, fill=black!\pdfuniformdeviate 40,fill opacity=1,rounded corners=1] (\col*\d/3,\row*\d/3) rectangle (\col*\d/3+\d/3, \row*\d/3+\d/3);
+%			}
+%		}
+%		
+%		%\draw[step=3.33mm] (0,0) grid (1,1);
+%		%\fill[white,fill opacity=.9] (0,0) rectangle (1,1);
+%		\end{scope}
+%	}
+%	\end{scope}
+%	\end{tikzpicture}
+%}
+%%
+%\newcommand{}{
+%	
+%	\begin{tikzpicture}[scale=2]
+%	\foreach \i in {0,...,9}
+%	\draw[tumblack,fill=tumorange!\pdfuniformdeviate 40,fill opacity=.9, rounded corners=0.5] (\i*.2, 0) rectangle (\i*.2+.2, .2);
+%	\end{tikzpicture}
+%}
+
+\newcommand{\figencoderfieldRNN}{
+	
+	\begin{tikzpicture}[scale=1, node distance=1em]%,show background rectangle,background rectangle/.style={draw=red}]
+	
+	%\matrix (m) [matrix of nodes, ampersand replacement=\&]{
+	
+	\def\d{1.7}
+	\def\encoderheight{0.4}
+	\def\decoderheight{-0.4}
+	\def\imagewidth{8mm}
+	\def\stateimagewidth{8mm}
+	\def\classimagewidth{8mm}
+	
+	\def\rgbone{images/network/48px/rgb1}
+	\def\rgbtwo{images/network/48px/rgb2}
+	\def\rgbthree{images/network/48px/rgb3}
+	\def\rgbfour{images/network/48px/rgb4}
+	\def\prediction{images/network/48px/prediction}
+	\def\groundtruth{images/network/48px/ground_truth}
+	\def\activation{images/network/48px/maize}
+	\def\state{images/network/48px/state}
+	
+	
+	%\draw [bigpassbox, fill=forwardcolor](1,.25) rectangle (10,4);
+	
+	\node[bigpassbox, fill=none, rectangle, minimum width=7cm,minimum height=3cm, anchor=south west, label={[shift={(2em,-3.5ex)}]north:}] (forwardbox) at (1,.15) {};
+	%\draw [bigpassbox, fill=backwardcolor](1,-.25) rectangle (10,-4);
+	
+	\draw pic (fw1) at (\d,\encoderheight) {seqlstmfw};% \&
+	\node[above=of fw1tl, label=above:{$\VInput_{1}$}](xfw1){
+		
+	};%images/network/time1_x
+	
+	\node[below= 3.5emof fw1-houtput, xshift=.5em, label=below:{$\V{y}_{1}$}](yfw1){
+		
+	};%images/network/time1_x
+	
+	\draw pic (fw2) at (2*\d,\encoderheight) {seqlstmfw};
+	\node[above=of fw2-input, label=above:{$\VInput_{2}$}](xfw2){
+		
+	}; % images/network/time11_x
+	
+	\node[below= 3.5emof fw2-houtput, xshift=.5em, label=below:{$\V{y}_{2}$}](yfw2){
+		
+	};%images/network/time1_x
+	
+	\draw pic (fw3) at (3*\d,\encoderheight) {seqlstmfw};
+	\node[above=of fw3-input](xfw3){$\dots$};
+	\node[below= 3.5emof fw3-houtput, xshift=.5em](yfw3){
+		%	
+		$\dots$
+	};%images/network/time1_x
+	
+	\draw pic (fw4) at (4*\d,\encoderheight) {seqlstmfw};
+	\node[above=of fw4-input, label=above:{$\VInput_T$}](xfw4){
+		
+	}; % images/network/time30_x
+	
+	\node[below= 3.5emof fw4-houtput, xshift=.5em, label=below:{$\V{y}_{T}$}](yfw4){
+		
+	};%images/network/time1_x
+	
+	\node[left=of fw1-input](enczerostateh){$\V{0}$};
+	\node[left=of fw1-cinput](enczerostatec){$\V{0}$};
+	\draw[endflow] (enczerostateh) -- (fw1-input);
+	\draw[endflow] (enczerostatec) -- (fw1-cinput);
+	
+	% draw connections from input to cells
+	\draw[flow] (xfw1) |- (fw1-input);
+	\draw[flow] (xfw2) |- (fw2-input);
+	\draw[flow] (xfw3) |- (fw3-input);
+	\draw[flow] (xfw4) |- (fw4-input);
+	
+	% draw hidden connections between cells
+	\draw[endflow] (fw1-houtput) -- (fw2-input);
+	\draw[endflow] (fw2-houtput) -- (fw3-input);
+	\draw[endflow] (fw3-houtput) -- (fw4-input);
+	
+	% draw hidden connections between cells
+	\draw[endflow] (fw1-coutput) -- (fw2-cinput);
+	\draw[endflow] (fw2-coutput) -- (fw3-cinput);
+	\draw[endflow] (fw3-coutput) -- (fw4-cinput);
+	
+	% outputs
+	\draw[endflow] (fw1-houtput) -- ($ (fw1-houtput)+(.5em,0) $) -- (yfw1);
+	\draw[endflow] (fw2-houtput) -- ($ (fw2-houtput)+(.5em,0) $) -- (yfw2);
+	\draw[endflow] (fw3-houtput) -- ($ (fw3-houtput)+(.5em,0) $) -- (yfw3);
+	\draw[endflow] (fw4-houtput) -- ($ (fw4-houtput)+(.5em,0) $) -- (yfw4);
+	
+	%\node[right= 2.5em of fw4-coutput](cfw){$\VCellState_T^\text{fw}$};
+	
+	%\draw[endflow] (fw4-coutput) -- (cfw);
+	
+	%};
+	\end{tikzpicture}
+}
+
+\newcommand{\figencoder}{
+
+\begin{tikzpicture}[scale=1, node distance=1em]%,show background rectangle,background rectangle/.style={draw=red}]
+
+%\matrix (m) [matrix of nodes, ampersand replacement=\&]{
+
+\def\d{1.7}
+\def\encoderheight{0.4}
+\def\decoderheight{-0.4}
+\def\imagewidth{8mm}
+\def\stateimagewidth{8mm}
+\def\classimagewidth{8mm}
+
+\def\rgbone{images/network/48px/rgb1}
+\def\rgbtwo{images/network/48px/rgb2}
+\def\rgbthree{images/network/48px/rgb3}
+\def\rgbfour{images/network/48px/rgb4}
+\def\prediction{images/network/48px/prediction}
+\def\groundtruth{images/network/48px/ground_truth}
+\def\activation{images/network/48px/maize}
+\def\state{images/network/48px/state}
+
+
+%\draw [bigpassbox, fill=forwardcolor](1,.25) rectangle (10,4);
+
+\node[bigpassbox, fill=none, rectangle, minimum width=7cm,minimum height=3cm, anchor=south west, label={[shift={(2em,-3.5ex)}]north:}] (forwardbox) at (1,.15) {};
+%\draw [bigpassbox, fill=backwardcolor](1,-.25) rectangle (10,-4);
+
+\draw pic (fw1) at (\d,\encoderheight) {seqlstmfw};% \&
+\node[above=of fw1tl, label=above:{$\VInput_{1}$}](xfw1){\includegraphics[width=\imagewidth]{\rgbone}};%images/network/time1_x
+
+\draw pic (fw2) at (2*\d,\encoderheight) {seqlstmfw};
+\node[above=of fw2-input, label=above:{$\VInput_{2}$}](xfw2){\includegraphics[width=\imagewidth]{\rgbtwo}}; % images/network/time11_x
+
+\draw pic (fw3) at (3*\d,\encoderheight) {seqlstmfw};
+\node[above=of fw3-input](xfw3){$\dots$};
+
+\draw pic (fw4) at (4*\d,\encoderheight) {seqlstmfw};
+\node[above=of fw4-input, label=above:{$\VInput_T$}](xfw4){\includegraphics[width=\imagewidth]{\rgbfour}}; % images/network/time30_x
+
+\node[left=of fw1-input](enczerostateh){$\V{0}$};
+\node[left=of fw1-cinput](enczerostatec){$\V{0}$};
+\draw[endflow] (enczerostateh) -- (fw1-input);
+\draw[endflow] (enczerostatec) -- (fw1-cinput);
+
+% draw connections from input to cells
+\draw[flow] (xfw1) |- (fw1-input);
+\draw[flow] (xfw2) |- (fw2-input);
+\draw[flow] (xfw3) |- (fw3-input);
+\draw[flow] (xfw4) |- (fw4-input);
+
+% draw hidden connections between cells
+\draw[endflow] (fw1-houtput) -- (fw2-input);
+\draw[endflow] (fw2-houtput) -- (fw3-input);
+\draw[endflow] (fw3-houtput) -- (fw4-input);
+
+% draw hidden connections between cells
+\draw[endflow] (fw1-coutput) -- (fw2-cinput);
+\draw[endflow] (fw2-coutput) -- (fw3-cinput);
+\draw[endflow] (fw3-coutput) -- (fw4-cinput);
+
+\node[right= 2.5em of fw4-coutput](cfw){$\VCellState_T^\text{fw}$};
+
+\draw[endflow] (fw4-coutput) -- (cfw);
+
+%};
+\end{tikzpicture}
+
+}

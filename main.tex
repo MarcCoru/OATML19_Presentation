@@ -1,0 +1,556 @@
+\documentclass[%
+  aspectratio=169,
+  9pt,
+  USenglish,
+  titlegraphic, % store custom image to .images/titlegraphic
+  affiliationintitlepagehead,
+  %progressbar,
+  affiliation,
+]{beamer}
+
+\usetheme{TUM}
+
+\input{preamble.tex}
+
+
+\usetikzlibrary{external}
+\tikzexternalize[prefix=tikz/]
+\tikzexternalize
+\tikzexternaldisable
+
+\usepackage{tummath}
+
+\setbeamertemplate{blocks}[rounded][shadow=false]
+
+%	\end{itemize}
+%	
+%	Research Scope 
+%	\begin{itemize}
+%		\item Imbalance of Raster and Label Data
+%		\item Analogies to NLP
+%		\item Sequence modeling
+%	\end{itemize}
+%		
+%	Research Projects
+%	\begin{itemize}
+%		\item Crop Classification with Multi-temporal Land Cover Classification
+%		\item Early Classificaiton of Time Series
+%	\end{itemize}
+%		
+%		
+%\end{frame}
+
+
+\title{Earth Observation and Machine Learning}
+\subtitle{From Language Model to Earth Model}
+\author[M. Rußwurm]{Marc Rußwurm M.Sc., advised by Dr. Marco Körner}
+\institute[TUM]{Technical University of Munich, Germany\\
+	Remote Sensing Technology}
+\date{May 3rd 2019, OATML-Lab, Oxford, UK}
+
+\begin{document}
+
+\begin{frame}[t]
+\titlepage
+\end{frame}
+
+
+{\setbeamercolor{background canvas}{bg=white}
+	\begin{frame}[plain]
+	\vfill
+	\begin{center}
+		\Huge\color{tumgraydark}
+		About
+		\hspace{2em}\includegraphics[width=5cm]{images/marc}
+	\end{center}
+	\vfill
+\end{frame}
+}
+
+\input{sections/introduction.tex}
+
+{\setbeamercolor{background canvas}{bg=black}
+	\begin{frame}[plain]
+	
+		\vfill
+		\Huge\color{white}
+		\begin{center}
+			\begin{columns}
+				\column{.5\textwidth}
+				\vspace{7em}
+				
+				\hfill 
+				Part I: Earth Observation
+				\column{.5\textwidth}
+				
+				\includegraphics[width=5cm]{images/dscovrepic/epic1}
+				%\includegraphics[width=7cm]{images/fdl}
+			\end{columns}
+		\end{center}
+		
+		\vfill
+	\end{frame}
+}
+
+\input{sections/EarthObservation.tex}
+
+{\setbeamercolor{background canvas}{bg=tumblue}
+	\begin{frame}[plain]
+	
+	\vfill
+	\Huge\color{white}
+	\begin{center}
+		\begin{columns}
+			\column{.66\textwidth}
+			\vspace{3.5em}
+			
+			\hfill 
+			Part II: Projects and Research
+			\column{.5\textwidth}
+			
+			\includegraphics[width=5cm]{images/TUM-white}
+			%\includegraphics[width=7cm]{images/fdl}
+		\end{columns}
+	\end{center}
+	
+	\vfill
+\end{frame}
+}
+
+
+
+\input{sections/research.tex}
+
+\begin{frame}
+\frametitle{Structure}
+
+\Large
+
+\begin{description}[itemsep=1em]
+	%	\item<1->[Outline Research] Outline general research objectives
+	\item<1->[Vegetation Monitoring] Learn a supervised classification model for Vegetation Classification
+	\item<2->[Early Time Series Classification] Identify the class as early in the sequence as possible
+	\item<3->[Compiling Public Datasets] bringing together the two communities by establishing datasets for multi-temporal Earth Observation data
+\end{description}
+\end{frame}
+
+{\setbeamercolor{background canvas}{bg=tumblue}
+	\begin{frame}[plain]
+	\vfill
+	\begin{center}
+		\Huge\color{tumwhite}
+		Vegetation Monitoring
+		\includegraphics[width=5cm]{images/TUM-white}
+	\end{center}
+	
+	\vfill
+\end{frame}
+}
+
+\input{sections/vegetationmonitoring.tex}
+
+
+{\setbeamercolor{background canvas}{bg=tumgraylight}
+	\begin{frame}[plain]
+	\vfill
+		\Huge\color{tumbluedark}
+		\begin{columns}
+			\column{.5\textwidth}
+			\vspace{4em}
+			
+			\hfill \textbf{Early} Time Series \\\hfill Classification
+			\column{.5\textwidth}
+			\includegraphics[width=4cm]{images/TUM-blue}
+			
+			\vspace{1em}
+			\includegraphics[width=7cm]{images/Irisa}
+		\end{columns}
+		%		\includegraphics[width=5cm]{images/TUM-white}
+		%		\includegraphics[width=7cm]{images/Irisa}
+
+	\vfill
+\end{frame}
+}
+
+\input{sections/earlyclassification.tex}
+
+
+{\setbeamercolor{background canvas}{bg=black}
+	\begin{frame}[plain]
+	\vfill
+	\begin{center}
+		\Huge\color{white}
+		Compiling Datasets
+		\includegraphics[width=7cm]{images/France_white}
+		%		\includegraphics[width=4cm]{images/Bavaria}
+	\end{center}
+	
+	\vfill
+\end{frame}
+}
+
+\begin{frame}
+\frametitle{Two Perspectives}
+\centering
+\begin{tikzpicture}[xscale=3.5, yscale=2]
+%\draw[fill=tumblue, draw=none, opacity=0.5](-1,0) circle (1.5);
+\node[fill=tumbluelight, draw=none, opacity=0.5, circle, minimum width=6cm, label=Earth Observation] at (-1,0){};
+
+\node[fill=tumorange!50, draw=none, opacity=0.5, circle, minimum width=6cm, label=Machine Learning] at (1,0){};
+%\draw[fill=tumorange, draw=none, opacity=0.5](1,0) circle (1.5);
+
+%\node at (-1.3,1){Data};
+
+\node[text width=3.5cm] at (-1,.9){\focusmethod is a \textbf{tool} for our \focusdata};
+\node[text width=3.5cm] at (1,.9){\focusdata is a \textbf{benchmark} for our \focusmethod};
+
+
+\node[text width=3.5cm] at (-1,.3){\textbf{should generalize} to applications of a \\ specific sub-field};
+\node[text width=3.5cm] at (1,.3){\textbf{must generalize} to many fields of applications};
+
+\node[text width=3.5cm] at (-1,-.3){data has specific \\ \textbf{phyisical properties}};
+\node[text width=3.5cm] at (1,-.3){data is a \textbf{feature vector}};
+%
+%\node[text width=2cm] at (-1.3,-.6){{physics}, {sensors}, {applications}};
+
+%\node at (1.3,1){Method};
+
+%\node at (-1.3,1){IGARSS};
+%\node at (-1.6,-1){ISPRS};
+%\node at (-1.2,-.6){IEEE-GRSS};
+%\node at (-1.8,.4){MDPI-RS Journal};
+%\node at (-1.3,0){RSE Journal};
+%
+%\node at (1.3,1){NeurIPS};
+%\node at (1.6,-1){CVPR};
+%\node at (1.2,-.6){ICML};
+%\node at (1.8,.4){ECCV};
+%\node at (1.3,.2){ECML};
+%
+%\node at (0,.5){CVPR EarthVision};
+%\node at (0,0){ECML MACLEAN};
+%\node at (0,-.5){(ESA-$\Phi$-week)};
+
+\end{tikzpicture}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Common Datasets}
+\centering
+\begin{tikzpicture}[scale=2]
+%\draw[fill=tumblue, draw=none, opacity=0.5](-1,0) circle (1.5);
+\node[fill=tumbluelight, draw=none, opacity=0.5, circle, minimum width=6cm, label=Earth Observation] at (-.8,0){};
+
+\node[fill=tumorange!50, draw=none, opacity=0.5, circle, minimum width=6cm, label=Machine Learning] at (.8,0){};
+%\draw[fill=tumorange, draw=none, opacity=0.5](1,0) circle (1.5);
+
+\node[font=\Large\bfseries, text width=2cm] at (0,0) {Benchmark Datasets};
+
+\end{tikzpicture}
+\end{frame}
+
+
+\input{sections/breizhCrops.tex}
+
+%{\setbeamercolor{background canvas}{bg=black}
+%	\begin{frame}[plain]
+%	\vfill
+%	\begin{columns}
+%		\column{.5\textwidth}
+%		\vfill
+%		\Huge\color{tumwhite}
+%		\vspace{5em}
+%		\hfill Towards unsupervised
+%		
+%		\column{.5\textwidth}
+%		
+%		
+%		\normalsize
+%		\begin{tikzpicture}[scale=1.5]
+%		\color{white}
+%		%\draw[fill=tumblue, draw=none, opacity=0.5](-1,0) circle (1.5);
+%		\node[fill=tumblue, draw=none, opacity=0.5, circle, minimum width=5cm, label=Earth Observation data, text opacity=1] at (-1,0){$\M{X}$};
+%		
+%		\node[fill=tumorange, draw=none, opacity=0.5, circle, minimum width=2cm, label=labels, text opacity=1] at (1,0){$\V{y}$};
+%		
+%		\end{tikzpicture}
+%		
+%		
+%	\end{columns}
+%	
+%	
+%	\vfill
+%\end{frame}
+%}
+%
+%\input{sections/unsupervised.tex}
+
+{\setbeamercolor{background canvas}{bg=tumblue}
+	\begin{frame}[plain]
+	
+	\vfill
+	\Huge\color{white}
+	\begin{center}
+		\begin{columns}
+			\column{.5\textwidth}
+			\vspace{3.5em}
+			
+			Part III: Initiatives between EO and ML
+			\column{.5\textwidth}
+			
+%			\includegraphics[width=7cm]{images/fdl}
+		\end{columns}
+	\end{center}
+	
+	\vfill
+\end{frame}
+}
+
+
+{\setbeamercolor{background canvas}{bg=fdlcolor}
+	\begin{frame}[plain]
+	
+	\vfill
+	\Huge\color{white}
+	\begin{center}
+		\begin{columns}
+			\column{.5\textwidth}
+			\vspace{3.5em}
+			
+			\hfill Satellite Data Fusion \\ \hfill for disaster response
+			\column{.5\textwidth}
+			
+			\includegraphics[width=7cm]{images/fdl}
+		\end{columns}
+	\end{center}
+	
+	\vfill
+\end{frame}
+}
+
+\input{sections/fdl.tex}
+
+\begin{frame}[t]
+	\frametitle{Workshops}
+	
+	\begin{columns}[t]
+		
+		\column{.5\textwidth}
+		\textbf{CVPR EarthVision}
+		\vspace{1em}
+		
+		\includegraphics[width=\textwidth]{images/EarthVision}
+		
+		Workshop CVPR \textbf{June 17, 2019}
+		\url{https://www.grss-ieee.org/earthvision2019/}
+		
+		\column{.5\textwidth}
+		\textbf{ECML MACLEAN}
+		\vspace{1em}
+	
+		\includegraphics[width=\textwidth]{images/maclean-1-768x245}
+		
+		\vspace{3em}
+		
+		Deadline \textbf{Deadline June 10th, 2019}
+		
+		Workshop ECML \textbf{September 20th, 2019}
+		
+	
+	\end{columns}
+\end{frame}
+
+%\begin{frame}
+%	\frametitle{Summing Up}
+%	
+%	
+%\end{frame}
+
+%
+%\begin{frame}
+%\frametitle{CVPR EarthVision}
+%
+%\begin{columns}[t]
+%	\column{.25\textwidth}
+%		Long Beach, USA
+%		
+%		\textbf{Deadline passed}
+%		
+%		Workshop CVPR \textbf{June 17, 2019}
+%		
+%		\url{https://www.grss-ieee.org/earthvision2019/}
+%	\column{.75\textwidth}
+%	
+%		\includegraphics[width=\textwidth]{images/EarthVision}
+%		
+%		Deadline \textbf{June 10th, 2019}
+%		
+%		Workshop ECML \textbf{September 20th, 2019}
+%		
+%	
+%\end{columns}
+%\end{frame}
+%
+%\begin{frame}
+%	\frametitle{ECML MACLEAN}
+%
+%	\begin{columns}[t]
+%		\column{.25\textwidth}
+%		
+%		Würzburg Germany
+%		
+%		Deadline \textbf{Deadline June 10th, 2019}
+%		
+%		Workshop ECML \textbf{September 20th, 2019}
+%	
+%		
+%		\url{https://mdl4eo.irstea.fr/maclean-machine-learning-for-earth-observation/}
+%		
+%		\column{.75\textwidth}
+%		
+%		\includegraphics[width=\textwidth]{images/maclean-1-768x245}
+%		
+%	\end{columns}
+%
+%\end{frame}
+%	
+%	Earth observation and Machine Learning workshop at ECML/PKDD 
+%	\url{http://ecmlpkdd2019.org/}
+
+
+\begin{frame}
+\frametitle{Summary}
+
+\begin{columns}
+	
+	\column{.5\textwidth}
+	
+	\visible<1->{
+		\textbf{Earth Observation}
+		\begin{itemize}
+			\item general overview on optical data
+			\item complexity of Earth Observation data
+			\item showed the balance between \textbf{spatial}, \textbf{temporal} and \textbf{spectral} resolution
+		\end{itemize}
+	}
+	
+	\visible<2->{
+		\textbf{Projects}
+		\begin{itemize}
+			\item illustrated some ML-related tasks
+%			\item outlined some challenges associated with EO
+			\item translate methods between disciplines		
+			\item connect via huge Benchmark Datasets	
+		\end{itemize}
+	}
+	
+	\visible<3->{
+		\textbf{Initiatives}
+		\begin{itemize}
+			\item hope to \textbf{see you at one of the Workshops}
+			\item or at \textbf{Frontier Developments Lab}!
+		\end{itemize}
+	}
+	
+	\column{.5\textwidth}
+	
+	\includegraphics[width=7cm]{images/dscovrepic/epicw1}
+	
+\end{columns}
+
+\end{frame}
+
+{\setbeamercolor{background canvas}{bg=black}
+	\begin{frame}[plain]
+	\vfill
+	\begin{center}
+		\Huge\color{tumwhite}
+		\only<1>{
+			\textbf{Thank you!}
+			\includegraphics[width=6cm]{images/Bavaria_sat}
+		}
+		\only<2>{
+			\textbf{Questions/Input?}
+			\includegraphics[width=7cm]{images/France_white}
+		}
+%		\only<3>{
+%			\textbf{Collaborations?}
+%			\includegraphics[width=7cm]{images/France_white}
+%		}
+%		
+	\end{center}
+
+
+\vspace{1em}	
+\color{tumbluelight}
+\textbf{Twitter}: @marccoru | \textbf{Github}: @marccoru or @tum-lmf | \textbf{Chair} \url{lmf.bgu.tum.de/vision} \\ 
+
+\vspace{1em}
+
+\Large
+BreizhCrops \url{https://github.com/TUM-LMF/BreizhCrops}
+	
+\vfill
+\end{frame}
+}
+
+
+\begin{frame}
+	\frametitle{Thank you!}
+	
+	\small
+	
+	\textbf{Papers:}
+	\begin{columns}[t]
+		
+		\column{.5\textwidth}
+		
+		\begin{itemize}
+			\item Rußwurm, M. and Körner, M. (2017). \textbf{Temporal Vegetation Modelling using Long Short-Term Memory Networks for Crop Identification from Medium-Resolution Multi-Spectral Satellite Images}. In IEEE/ISPRS EarthVision 2017 Workshop, Proceedings of the IEEE CVPR Workshops. \textbf{\color{tumorange} Best Paper Award}
+			\item 	Rußwurm, M., Lefèvre, S., Courty, N., Emonet, R., Körner, M., \& Tavenard, R. (2019).\textbf{ End-to-end Learning for Early Classification of Time Series}. arXiv preprint arXiv:1901.10681.
+			\item Rußwurm, M., \& Körner, M. (2018). \textbf{Multi-temporal land cover classification with sequential recurrent encoders}. ISPRS International Journal of Geo-Information, 7(4), 129.
+		\end{itemize}
+		
+		\column{.5\textwidth}
+		\begin{itemize}
+			\item Rußwurm, M., \& Körner, M. (2018). \textbf{Convolutional LSTMs for Cloud-Robust Segmentation of Remote Sensing Imagery}. NeurIPS2018 Spatiotemporal Workshop. https://openreview.net/pdf?id=Sye7df9CK7
+			\item Rudner, T. G. J.; Rußwurm, M.; Fil, J.; Pelich, R.; Bischke, B.; Kopačková, V.; Biliński, P. (2019) \textbf{Segmenting Flooded Buildings via Fusion of Multiresolution, Multisensor, and Multitemporal Satellite Imagery}. In AAAI.
+		\end{itemize}
+		
+		\normalsize
+		
+		\vspace{1em}		
+		\textbf{Twitter}
+		\begin{itemize}
+			\item https://twitter.com/MarcCoru
+		\end{itemize}
+		
+		\textbf{Github}
+		\begin{itemize}
+			\item https://github.com/marccoru
+			\item https://github.com/TUM-LMF
+		\end{itemize}
+		
+	\end{columns}
+\end{frame}
+
+\input{sections/pool.tex}
+
+%\begin{frame}
+%\frametitle{References}
+%% This prints the bibliography on the slide
+%%\usepackage[backend=biber]{biblatex}
+%\bibliography{bib/references.bib}
+%\bibliographystyle{plain}
+%% Removes icon in bibliography
+%\setbeamertemplate{bibliography item}{}
+%
+%\end{frame}
+
+
+\end{document}
+
+
+

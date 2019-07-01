@@ -1,0 +1,26 @@
+\begin{tikzpicture}
+	% each layer
+	
+	% raster size
+  \def\d{0.73}  	
+	
+	% distance layer
+	\def\s{\d*5}
+	
+	\foreach \i in {1,...,6}
+	{		
+		\begin{scope}[
+      yshift=\s*\i,every node/.append style={
+			yslant=0.5,xslant=-1},yslant=0.5,xslant=-1
+		]
+		%\draw[step=3.33mm] (0,0) grid (1,1);
+		%\fill[black,fill opacity=.9] (0.333,0.333) rectangle (0.333,0.333);    	    	  
+		
+		\foreach \row in {0,...,2}{
+			\foreach \col in {0,...,2}{
+				\draw[tumblack, fill=tumblue!\pdfuniformdeviate 40,fill opacity=1,rounded corners=1] (\col*\d/3,\row*\d/3) rectangle (\col*\d/3+\d/3, \row*\d/3+\d/3);
+	        }
+		}
+		\end{scope}
+	}	
+\end{tikzpicture}

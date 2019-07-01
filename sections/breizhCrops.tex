@@ -1,0 +1,137 @@
+
+\begin{frame}
+\frametitle{BreizhCrops Dataset (available by next week!)}
+
+\includegraphics[width=3cm]{images/map/europe}
+\includegraphics[width=3cm]{images/map/regions}
+\includegraphics[width=3cm]{images/map/breizh}
+\includegraphics[width=3cm]{images/map/parcels}
+
+\vspace{1em}
+
+\input{images/breizhcrops/example.tikz}
+\begin{columns}
+	\column{.5\textwidth}
+	
+	\textbf{corn grain and silage}
+	\dataexample{images/breizhcrops/example/6139251.csv}
+	
+	\column{.5\textwidth}
+	
+	\textbf{temporary meadows}
+	\dataexample{images/breizhcrops/example/3685593.csv}
+	
+\end{columns}
+
+\vspace{1em}
+
+\Large
+580k samples of Time Series $\M{X}$ and labels $\V{y}$. \Large \url{https://github.com/TUM-LMF/BreizhCrops}
+
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Challenges and Impact}
+	
+	\Large
+	
+	\begin{columns}[t]
+	
+	\column{.5\textwidth}
+	
+	\visible<1->{
+		\textbf{Impact}
+		\vspace{1em}
+		
+		\begin{description}[itemsep=.5em]
+		\item large scale \textbf{real-world dataset}
+		\item effectively \textbf{unlimited data} (spatially and temporally)
+		\item \textbf{assessing generalization} over large regions
+		\item potential for further \textbf{vegetation characteristics} (drought indicator, early classification, crop yield)
+		\end{description}
+	}
+	
+	\column{.5\textwidth}
+	
+	\visible<2->{
+	\textbf{Challenges}
+	\vspace{1em}
+	
+	\begin{description}[itemsep=.5em]
+		\item \textbf{Imbalanced} class \textbf{labels}
+		\item Classes with \textbf{similar characteristics}
+		\item Non-Gaussian noise induced by \textbf{clouds}
+		\item \textbf{Regional} \textbf{variations} in the class distributions
+		\item \textbf{Spatial} \textbf{autocorrelation}
+		\item \textbf{Irregular} temporal \textbf{sampling} distance
+		\item \textbf{Variable} \textbf{sequence} length
+	\end{description}
+}
+	
+
+	\end{columns}
+	
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Multi-Layer RNN baseline}
+
+\input{images/confmat.tikz}
+
+\begin{columns}
+	
+	\column{.5\textwidth}
+	\textbf{Precision}
+	
+	\confmat{images/data/BreizhCrops_rnn/npy/confmat_flat.csv}{3}{1}
+	
+	\column{.5\textwidth}
+	\textbf{Recall}
+	
+	\confmat{images/data/BreizhCrops_rnn/npy/confmat_flat.csv}{4}{1}
+	
+\end{columns}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Transformer baseline}
+
+\input{images/confmat.tikz}
+
+\begin{columns}
+	
+	\column{.5\textwidth}
+	\confmat{images/data/BreizhCrops_transformer/npy/confmat_flat.csv}{3}{1}
+	
+	\column{.5\textwidth}
+	\confmat{images/data/BreizhCrops_transformer/npy/confmat_flat.csv}{4}{1}
+	
+\end{columns}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Going Big...}
+
+\includegraphics[width=5cm]{images/EuroCrops}
+\includegraphics[width=5cm]{images/France}
+\includegraphics[width=4cm]{images/Bavaria}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Supported by Google Research Credits}
+
+\includegraphics[width=.3\textwidth]{images/google_research_credits}
+\includegraphics[width=.3\textwidth]{images/google}
+\includegraphics[width=.2\textwidth]{images/earth-engine-logo}
+%\includegraphics[width=3cm]{images/250px-Google-Cloud-Storage-Logo}
+%\includegraphics[width=3cm]{images/Google_Compute_Engine_logo}
+%\includegraphics[width=3cm]{images/google_cloud_sql}
+
+
+\end{frame}

@@ -1,0 +1,146 @@
+
+\begin{frame}
+	\frametitle{Winter Research Stay at IRISA Obelix Lab in France}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+		
+		Research Stay
+		\begin{itemize}[itemsep=1em]
+			\item Prof. \textbf{Sebastien Lefèvre} and Prof. \textbf{Romain Tavenard}
+			\item Obelix: \textbf{Environment observation} with \textbf{complex imagery}
+			\item Vannes and Rennes, Britanny, France
+		\end{itemize}
+		
+		\vspace{1em}
+		\url{http://www-obelix.irisa.fr/}
+		
+		\column{.5\textwidth}
+		
+		\includegraphics[width=5cm]{images/map/europe}
+		
+	\end{columns}
+	
+\end{frame}
+%
+%\begin{frame}<presentation:1>
+%\frametitle{Auto-regressive classification model}
+%
+%\begin{columns}
+%	
+%	\column{.5\textwidth}
+%	\begin{center}
+%		\input{images/backprop_example.tikz}
+%	\end{center}
+%	\column{.5\textwidth}
+%	\input{images/qualitative_example.tikz}
+%	
+%	
+%\end{columns}
+%
+%\end{frame}
+%
+%\begin{frame}
+%	\frametitle{Research Stay in Brittany}
+%	
+%	
+%\end{frame}
+
+
+\tikzstyle{rnn}=[draw,circle]
+\tikzstyle{annot}=[rounded corners, fill=colorblue!20]
+\colorlet{colortrain}{colorblue}
+\colorlet{colorinfer}{colororange}
+\tikzstyle{infer}=[-stealth, shorten >=.0em, shorten <=.0em, colorinfer]
+\tikzstyle{loss}=[fill=colorblue!10, rounded corners, font=\small]
+\tikzstyle{grad}=[colortrain]
+
+\newcommand{\classimagepair}[1]{
+	\def\sample{#1}
+	\begin{tikzpicture}[node distance=.2em]
+	\node[label=above:{inputs $\V{x}_t$}](a){\includegraphics[width=.5\textwidth]{images/classification_without_earliness/TwoPatterns30EpochsNoEarliness/sample_\sample_x.png}};
+	\node[label=above:{softmaxed class scores $\yhat_t$}, right=of a](b){\includegraphics[width=.5\textwidth]{images/classification_without_earliness/TwoPatterns30EpochsNoEarliness/sample_\sample_p(y).png}};
+	
+	\visible<2->{
+		%\draw (-2,-2) to[grid with coordinates] (8,4);
+		\node[annot, yshift=3em](wiggle1) at ($ (a)!0.3!(b) $) {event \#1};
+		\draw (wiggle1) -- (-1.5,0);
+		\draw (wiggle1) -- (5.5,-1);
+	}
+	\visible<3->{
+		\node[annot, yshift=-5em](wiggle2) at ($ (a)!0.3!(b) $) {event \#2};
+		\draw (wiggle2) -- (1,0);
+		\draw (wiggle2) -- (7.5,0);
+	}
+	
+	\visible<4->{
+		\draw[very thick] (8.5,-2) -- (8.5,2); 
+		\node[annot, yshift=-5em, anchor=east](stop) at (10,-1) {...we could stop here};
+%		\draw[shorten >=1em] (stop)++(2,0.5) -- (8,0);
+	}
+	\end{tikzpicture}
+}
+
+\begin{frame}<presentation:1-4>{Class Predictions}
+\classimagepair{0}
+\end{frame}
+
+\begin{frame}
+\frametitle{ArXiv Paper: End-to-end Learning for Early Classification of Time Series}
+
+\begin{columns}
+	
+	
+	\column{.5\textwidth}
+	
+	Rußwurm, M., Lefèvre, S., Courty, N., Emonet, R., Körner, M., \& Tavenard, R. (2019).\textbf{ End-to-end Learning for Early Classification of Time Series}. arXiv preprint arXiv:1901.10681.
+	
+	
+	\column{.5\textwidth}
+	
+	\includegraphics[width=4cm]{images/elects_arxiv}
+	
+\end{columns}
+
+\end{frame}
+
+
+
+%\begin{frame}
+%	\frametitle{Autoregressive Classification Model}
+%	
+%	\input{images/classmodel.tikz}
+%	
+%\end{frame}
+
+
+\begin{frame}
+\frametitle{Early Classification on Remote Sensing Data}
+\input{images/example.tikz}
+
+\url{https://arxiv.org/abs/1901.10681}
+
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Stopping times per crop Class}
+	
+	\input{images/classboxplots.tikz}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Impact of Early Classification on Vegetation Data}
+	
+	\Large
+	
+	\begin{itemize}[itemsep=1em]
+		\item<1-> \textbf{supervised end-to-end} learning scenario
+		\item<2-> we get a stopping time \textbf{for free} solely from classifying labels
+		\item<3-> relate to \textbf{characteristic features}, i.e., \textbf{crop phenology}
+		\item<4-> next: assess seasonal shifts in \textbf{vegetation phenology} due to \textbf{environmental conditions}
+	\end{itemize}
+	
+\end{frame}
+
